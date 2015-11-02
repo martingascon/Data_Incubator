@@ -3,10 +3,10 @@ library(ggplot2)
 library(dplyr)
 library(reshape2)
 
+
 # 1) Does the Stock Market Affect the Housing Market?
 # 2) If there is any effect, is this the same for different cities?
 # 3) Which index is more connected to the Housing Market?
-# 4) Does the consumer sentiment affect the Housing Market?
 
 
 # set working Directory
@@ -45,15 +45,6 @@ nasdaq <-read.table("./data/nasdaq_comp.csv", sep=",",head=TRUE)
 nasdaq <-nasdaq[order(-1:-229),c(5)]
 
 
-######################### Relation between data.
-
-# calculate the correlation matrix
-set.seed(246)
-cormat <- apply(df, MARGIN=1, FUN=function(z) apply(df, MARGIN=1, FUN=function(y) cor(z, y)))
-
-# print the first five elements of the correlation matrix
-print(cormat[1:5,1:5])
-
 ########################################################## PLOT 1
 # 1/2) is there relationship with The stock market price?
 
@@ -85,7 +76,7 @@ axis(side=4, at = pretty(range(nyse_dj),col="blue",cx=0.4))
 legend("bottomright", inset=0.01,c(paste("R=",round(sfc, digits=2))), col=c("black"),cex=0.7)
 
 
-# The housing and stock markets are cleare interconnected. 
+# The housing and stock markets are clearly interconnected. 
 # but not exactly in the same way for different cities. 
 # The Correlation for SF is higher than in NY (0.84 vs 0.79)
 
@@ -131,8 +122,6 @@ legend("bottomright", inset=0.01,c(paste("R=",round(sfc2, digits=2))), col=c("bl
 # 4) which cities are more correlated to Dow Jones, which ones to NASDAQ?
 
 
-
-
 # now let's select the 5 most/least expensive cities in US
 most <- by_city[order(-by_city[,229],rownames(by_city)),] 
 less <- by_city[order(by_city[,229],rownames(by_city)),]
@@ -146,7 +135,7 @@ rownames(less)[1:5]
 #"Shenandoah"        "Town of Salamanca" "Cahokia"        
 # "East Saint Louis"  "Youngstown"       
 
-
+##################################### More correlated
 # cities correlated with DJ
 mcmdj<-c()
 for (i in 1:3672) {mcmdj[i]<-as.numeric(cor(t(by_city[i,]),nyse_dj))}
@@ -156,10 +145,6 @@ mcmdj[1:5]
 # Mountain View    Eagle Pass     Cupertino    San Carlos     Sunnyvale 
 # 0.8840694     0.8834987     0.8795367     0.8784956     0.8770255 
 
-mcmdj2<-mcmdj[order(mcmdj)]
-mcmdj2[1:5]
-# Detroit   Town of Beloit      Center Line          Redford Garfield Heights 
-# -0.4113483       -0.3460930       -0.3104341       -0.2955093       -0.2914177
 
 # cities correlated with NA
 mcmna<-c()
@@ -172,7 +157,28 @@ mcmna[1:5]
 # 0.7236257     0.7134041     0.7011296     0.6991091     0.6922888 
 
 
+##################################### Less correlated
+mcmdj2<-mcmdj[order(mcmdj)]
+mcmdj2[1:5]
+# Detroit   Town of Beloit      Center Line          Redford Garfield Heights 
+# -0.4113483       -0.3460930       -0.3104341       -0.2955093       -0.2914177
+
+
+mcmna2<-mcmna[order(mcmna)]
+mcmna2[1:5]
+# Palo Alto     Hohenwald       Purcell Mountain View     Cupertino 
+# 0.7236257     0.7134041     0.7011296     0.6991091     0.6922888
+
+
+
 # As a curiosity, Here is the matrix of the Housing price correlation for 10 cities 
+
+# calculate the correlation matrix
+set.seed(246)
+cormat <- apply(df, MARGIN=1, FUN=function(z) apply(df, MARGIN=1, FUN=function(y) cor(z, y)))
+
+# print the first five elements of the correlation matrix
+print(cormat[1:5,1:5])
 
 # print corr-plot of the correlation matrix using clustering
 corrplot(M[1:50,1:50], order = "hclust", addrect = 10)
