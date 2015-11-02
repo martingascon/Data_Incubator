@@ -12,7 +12,7 @@ My idea was to compare the housing market with the stock market. If there is a c
 Some of the various questions that I would like to answer include: 
 
 * Does the Stock Market Affect the Housing Market?
-* If there is any effect, is this the same for different cities?
+* If there is an effect effect, is this the same for different cities?
 * Which index is more connected to the Housing Market?
 
 
@@ -148,7 +148,7 @@ less <- by_city[order(by_city[,229],rownames(by_city)),]
 # 5 most expensive cities:
 rownames(most)[1:10]
 ```
-All in California. 4 of them in Silicon Valley. 
+All in California. 8 of them in Silicon Valley. 
 
 b) which cities are the 5 least expensive in the U.S. 
 ```{r, echo=FALSE}
