@@ -140,17 +140,17 @@ It was also surprising that NASDAQ, which has more companies from the technology
 
 If we consider all the cities now, we can answer a few questions:
 
-a) which cities are the 5 most/least expensive ones in the U.S. 
+a) which cities are the 10 most expensive in the U.S. 
 ```{r, echo=FALSE}
 # now let's select the 5 most/least expensive cities in US
 most <- by_city[order(-by_city[,229],rownames(by_city)),] 
 less <- by_city[order(by_city[,229],rownames(by_city)),]
 # 5 most expensive cities:
-rownames(most)[1:5]
+rownames(most)[1:10]
 ```
 All in California. 4 of them in Silicon Valley. 
 
-b) which cities are the 5 least expensive ones in the U.S. 
+b) which cities are the 5 least expensive in the U.S. 
 ```{r, echo=FALSE}
 # 5 least expensive cities:
 rownames(less)[1:5]
@@ -167,7 +167,7 @@ mcmdj[1:5]
 # Mountain View    Eagle Pass     Cupertino    San Carlos     Sunnyvale 
 # 0.8840694     0.8834987     0.8795367     0.8784956     0.8770255 
 ```
-Curiously, where the headquarters of Google, Apple and Yahoo are. 
+Curiously, 3 of them have the headquarters of Google, Apple and Yahoo.  
 
 d) which cities are more correlated to NASDAQ?
 ```{r, echo=FALSE}
@@ -181,7 +181,7 @@ mcmna[1:5]
 # Palo Alto     Hohenwald       Purcell Mountain View     Cupertino 
 # 0.7236257     0.7134041     0.7011296     0.6991091     0.6922888 
 ```
-In this case, we have Palo Alto which includes Facebook. 
+In this case, we have Palo Alto which is very close to Facebook headquarters. 
  
 e) which cities are less correlated to Dow Jones?
 ```{r, echo=FALSE}
@@ -199,7 +199,7 @@ mcmdj2[1:4]
  
 ```
 
-It is surprising the anticorrelation from Detroit with the Stock Markets.
+It is surprising the anticorrelation of Detroit with the Stock Markets.
 
 ### Conclusions
 

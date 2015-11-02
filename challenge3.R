@@ -61,7 +61,7 @@ plot(x,by_city["New York",], main="New York",type="l",col="black", lwd=2.5,
 par(new=TRUE)
 plot(x,predict(loess(nyse_dj~x)), type = "l", col="blue", axes = FALSE, bty = "n", 
      xlab = "", ylab = "",lwd=2.5)
-legend("topleft", inset=0.01,c("Housing","NYSE"), col=c("black","blue"),lwd=c(2.5,2.5),cex=0.7)
+legend("topleft", inset=0.01,c("Housing","Dow Jones"), col=c("black","blue"),lwd=c(2.5,2.5),cex=0.7)
 axis(side=4, at = pretty(range(nyse_dj),col="blue",cx=0.4))
 legend("bottomright", inset=0.01,c(paste("R=",round(nyc, digits=2))), col=c("black"),cex=0.7)
 
@@ -71,7 +71,7 @@ plot(x,by_city["San Francisco",],main="San Francisco",type="l",col="black", lwd=
 par(new=TRUE)
 plot(x,predict(loess(nyse_dj~x)), type = "l", col="blue", axes = FALSE, bty = "n", 
      xlab = "", ylab = "",lwd=2.5)
-legend("topleft", inset=0.01, c("Housing","NYSE"), col=c("black","blue"),lwd=c(2.5,2.5),cex=0.7)
+legend("topleft", inset=0.01, c("Housing","Dow Jones"), col=c("black","blue"),lwd=c(2.5,2.5),cex=0.7)
 axis(side=4, at = pretty(range(nyse_dj),col="blue",cx=0.4))
 legend("bottomright", inset=0.01,c(paste("R=",round(sfc, digits=2))), col=c("black"),cex=0.7)
 
@@ -175,13 +175,15 @@ mcmna2[1:5]
 
 # calculate the correlation matrix
 set.seed(246)
-cormat <- apply(df, MARGIN=1, FUN=function(z) apply(df, MARGIN=1, FUN=function(y) cor(z, y)))
+cormat <- apply(by_city, MARGIN=1, FUN=function(z) apply(by_city, MARGIN=1, FUN=function(y) cor(z, y)))
 
 # print the first five elements of the correlation matrix
 print(cormat[1:5,1:5])
+M <- cor(cormat)
 
+par(mfrow = c(1, 1))
 # print corr-plot of the correlation matrix using clustering
-corrplot(M[1:50,1:50], order = "hclust", addrect = 10)
+corrplot(M[1:500,1:500], order = "hclust", addrect = 10)
 
 
  
